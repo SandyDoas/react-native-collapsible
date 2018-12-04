@@ -39,7 +39,8 @@ export default class Accordion extends Component {
     sectionContainerStyle: {},
   };
 
-  _toggleSection(section) {
+  _toggleSection(section, sectionObj) {
+    this.props.selectItem(sectionObj);
     if (!this.props.disabled) {
       const { activeSections, expandMultiple, onChange } = this.props;
 
@@ -102,9 +103,10 @@ export default class Accordion extends Component {
             {expandFromBottom && renderCollapsible(section, key)}
 
             <Touchable
-              onPress={() => this._toggleSection(key)}
+             {...touchableProps}
+              onPress={() => this._toggleSection(key, section)}
               underlayColor={underlayColor}
-              {...touchableProps}
+             
             >
               {renderHeader(
                 section,
